@@ -3,7 +3,7 @@ export default {
   data() {
     return {
       user: {
-        name: 'Anubha Rajput',
+        userName: 'Anubha Rajput',
         address: '123 Main Street',
         dob: '2000-10-21'
       },
@@ -30,7 +30,6 @@ export default {
       this.showAge=null;
     },
     validateAge() {
-      console.log("ok")
       this.showAge = true;
       if (this.age !== null) {
         if (this.age < 18) {
@@ -44,9 +43,6 @@ export default {
         this.showAge = "Please calculate age first.";
       }
     }
-  },
-  mounted() {
-    console.log(`The initial Age is ${this.age}.`)
   }
 }
 </script>
@@ -66,9 +62,9 @@ export default {
       </div>
     <ul>
       <li v-for="user in users" :key="user.name">
-        <div class="li-item"> <span>Name: </span> {{ user.name }}</div>
+        <div class="li-item"> <span>Name: </span> {{ user.userName }}</div>
         <div class="li-item"> <span>Age: </span> {{ user.age }}</div>
-        <img :src="user.imageUrl" alt="" srcset="">
+        <img :src="user.imageUrl" alt="userName" srcset="">
       </li>
     </ul>
   </div>
