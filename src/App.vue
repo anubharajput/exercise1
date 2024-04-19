@@ -12,7 +12,6 @@ export default {
       showAge: false,
       isError: null,
       isValid:false,
-      userIdCounter: 1,
       users: [
         { userName: 'Rahul', age: 24, imageUrl: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/35af6a41332353.57a1ce913e889.jpg" },
         { userName: 'Rohit', age: 20, imageUrl: "https://s3-eu-west-1.amazonaws.com/files2.fd.nl/Erwin/Slider+Daan/stefan-bron-2.jpg" },
@@ -45,19 +44,16 @@ export default {
         this.showAge = "Please calculate age first.";
       }
     },
-    generateTwoDigitId() {
-      const id = this.userIdCounter++;
-      return ('0' + id).slice(-2);
-    }
   },
   computed: {
     usersWithIds() {
       return this.users.map(user => ({
         ...user,
-        userId: this.generateTwoDigitId() 
+        userId: parseInt(uuidv4().replace(/\D/g, '').substr(0, 2))
       }));
     }
-  }
+  },
+
 }
 </script>
 <template>
