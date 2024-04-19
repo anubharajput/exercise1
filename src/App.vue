@@ -48,17 +48,18 @@ export default {
 </script>
 <template>
   <div class="main-container">
-    <p>Name: {{ user.name }}</p>
-    <p>Address: {{ user.address }}</p>
-    <p>DOB:{{ user.dob }}</p>
-    <button v-on:click="calculateAge">Calculate Age</button>
-    <p>{{ age }}</p>
-    <button v-if="age !== null" v-on:click="validateAge">Validate Age</button>
-    <p v-if="showAge === true" :class="{'validate':  validated}">'You are OK to use the website.'</p>
-    <p v-if="showAge === false" :class="{'error':isError}">You are under age.</p>
+    <p><span>Name:</span> {{ user.name }}</p>
+    <p><span>Address:</span> {{ user.address }}</p>
+    <p><span>DOB:</span>{{ user.dob }}</p>
+    <button  v-on:click="calculateAge">Calculate Age</button>
+    <p v-show="age!=null"><span>Age:</span>{{ age }}</p>
+    <button v-show="age !== null" v-on:click="validateAge">Validate Age</button>
+    <p v-show="showAge === true" :class="{'validate':  validated}">'You are OK to use the website.'</p>
+    <p v-show="showAge === false" :class="{'error':isError}">You are under age.</p>
     <ul>
       <li v-for="user in users" :key="user.name">
-        {{ user.name }}--{{ user.age }}
+        <div class="li-item"> <span>Name: </span>  {{user.name}}</div>
+        <div class="li-item"> <span>Age: </span>   {{ user.age }}</div>
         <img :src="user.imageUrl" alt="" srcset="">
       </li>
     </ul>
@@ -80,7 +81,7 @@ export default {
 ul{
   list-style: none;
   display: flex;
-  gap:10px;
+  gap:15px;
 }
 ul li img{
   height: 100px;
@@ -90,5 +91,18 @@ ul li img{
 ul li{
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap:10px;
+}
+ul li .li-item
+{
+  display: flex;
+}
+span{
+  font-size:1.1rem;
+  font-weight: 550;
+}
+button{
+  cursor: pointer;
 }
 </style>
