@@ -52,9 +52,9 @@ export default {
 </script>
 <template>
   <div class="main-container">
-    <p><span>Name:</span> {{ user.name }}</p>
-    <p><span>Address:</span> {{ user.address }}</p>
-    <p><span>DOB:</span>{{ user.dob }}</p>
+    <p class="user-data"><span>Name:</span> {{ user.name }}</p>
+    <p class="user-data"><span>Address:</span> {{ user.address }}</p>
+    <p class="user-data"><span>DOB:</span>{{ user.dob }}</p>
     <button @click="calculateAge">Calculate Age</button>
       <div v-show="age">
         <p><span class="title">Age:</span>{{age}}</p>
@@ -93,6 +93,7 @@ ul {
   list-style: none;
   display: flex;
   gap: 15px;
+  margin-top:25px;
 }
 
 ul li img {
@@ -110,6 +111,7 @@ ul li {
 
 ul li .li-item {
   display: flex;
+  gap:10px;
 }
 
 span {
@@ -119,5 +121,9 @@ span {
 
 button {
   cursor: pointer;
+}
+.user-data{
+  display: flex;
+  gap:10px;
 }
 </style>
