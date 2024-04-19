@@ -1,4 +1,5 @@
 <script>
+import { v4 as uuidv4 } from 'uuid';
 export default {
   data() {
     return {
@@ -11,10 +12,11 @@ export default {
       showAge: false,
       isError: null,
       isValid:false,
+      userIdCounter: 1,
       users: [
         { userName: 'Rahul', age: 24, imageUrl: "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/35af6a41332353.57a1ce913e889.jpg" },
         { userName: 'Rohit', age: 20, imageUrl: "https://s3-eu-west-1.amazonaws.com/files2.fd.nl/Erwin/Slider+Daan/stefan-bron-2.jpg" },
-        { userName: 'Anubha', age: 21, imageUrl: "https://static.nieuwsblad.be/Assets/Images_Upload/2012/10/07/Stefan-004-kl.jpg" },
+        { userName: 'amit', age: 21, imageUrl: "https://static.nieuwsblad.be/Assets/Images_Upload/2012/10/07/Stefan-004-kl.jpg" },
         { userName: 'amit', age: 21, imageUrl: "https://media.licdn.com/dms/image/C4E03AQGAHt1PVFJO6A/profile-displayphoto-shrink_800_800/0/1623249411702?e=2147483647&v=beta&t=PhjGA8rK15XMw5cFPTLz96KWHaYP_beHpHfqgoHj7bM" }
       ],
       validated: true,
@@ -42,6 +44,18 @@ export default {
       } else {
         this.showAge = "Please calculate age first.";
       }
+    },
+    generateTwoDigitId() {
+      const id = this.userIdCounter++;
+      return ('0' + id).slice(-2);
+    }
+  },
+  computed: {
+    usersWithIds() {
+      return this.users.map(user => ({
+        ...user,
+        userId: this.generateTwoDigitId() 
+      }));
     }
   }
 }
@@ -61,7 +75,7 @@ export default {
         <p v-else :class="{'error':isError}">You Are Underage</p>
       </div>
     <ul>
-      <li v-for="user in users" :key="user.name">
+      <li v-for="user in usersWithIds" :key="user.userId">
         <div class="li-item"> <span>Name: </span> {{ user.userName }}</div>
         <div class="li-item"> <span>Age: </span> {{ user.age }}</div>
         <img :src="user.imageUrl" alt="userName" srcset="">
